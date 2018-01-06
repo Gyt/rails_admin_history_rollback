@@ -4,9 +4,15 @@
       %th= "#{t('admin.history_rollback.table_headers.field')}"
       %th{:colspan => 3}= "#{t('admin.history_rollback.table_headers.changes')}"
   %tbody
-    - @version.changeset.sort.each do |changes|
+    - if @version.event == 'destroy'
+      - object = @version.reify
       %tr
-        %td= changes[0]
-        %td.original.hide= changes[1][0]
-        %td.changed.hide= changes[1][1]
-        %td.diff
+        %td= object.user
+        %td= object.content.html_safe
+    - else
+      - @version.changeset.sort.each do |changes|
+        %tr
+          %td= changes[0]
+          %td.original.hide= changes[1][0]
+          %td.changed.hide= changes[1][1]
+          %td.diff
