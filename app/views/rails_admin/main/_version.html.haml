@@ -8,7 +8,7 @@
     - if @version.event == 'destroy'
       - object = @version.reify
       %tr
-        %td
+        %td{ style: "white-space: normal;" }
           = "User: #{object.user}"
           %br
           = "Whodunnit: #{User.find_by(id: @version.whodunnit.to_i)}"
