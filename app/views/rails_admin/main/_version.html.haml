@@ -7,9 +7,12 @@
     - if @version.event == 'destroy'
       - object = @version.reify
       %tr
-        %td= object.user
-        %td= User.find_by(id: @version.whodunnit.to_i)
-        %td= object.content.html_safe
+        %td
+          = "User: #{object.user}"
+          %br
+          = "Whodunnit: #{User.find_by(id: @version.whodunnit.to_i)}"
+          %br
+          = object.content.html_safe
     - else
       - @version.changeset.sort.each do |changes|
         %tr
